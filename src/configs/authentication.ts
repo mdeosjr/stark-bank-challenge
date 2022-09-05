@@ -1,10 +1,7 @@
 import starkbank from 'starkbank'
-import '../dotenv.js'
 
-let user = new starkbank.Project({
+export const user = new starkbank.Project({
 	environment: 'sandbox',
-	id: '4784188939042816',
+	id: process.env.PROJECT_ID,
 	privateKey: process.env.PRIVATE_KEY
 })
-
-starkbank.user = user
