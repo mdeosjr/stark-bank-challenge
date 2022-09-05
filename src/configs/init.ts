@@ -7,5 +7,5 @@ export default async function generateInvoices() {
 
 	const invoicesArray = invoices()	
 
-	await starkbank.invoice.create(invoicesArray)
+	//await starkbank.invoice.create([invoicesArray[0]])
 }

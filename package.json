@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "start": "node index.ts"
+    "start": "node build/server.js"
   },
   "keywords": [],
   "author": "",
