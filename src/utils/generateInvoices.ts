@@ -3,21 +3,27 @@ import nodeSchedule from 'node-schedule'
 import { user } from '../configs/authentication.js'
 import invoices from './invoicesFactory.js'
 
+starkbank.user = user
+
 async function generateInvoices() {
-	starkbank.user = user
+	sendInvoices()
 
 	const startTime = new Date(Date.now())
 	const endTime = new Date(startTime.getTime() + 86400000)
-	const invoicesArray = invoices()
 
 	nodeSchedule.scheduleJob(
-		{ start: startTime, end: endTime, rule: '0 * */3 * * *' },
-		async function () {
-			await starkbank.invoice.create(invoicesArray)
+		{ start: startTime, end: endTime, rule: '0 */3 * * *' },
+		function () {
+			sendInvoices()
 		}
 	)
+}
 
-	return invoicesArray
+async function sendInvoices() {
+	const invoicesArray = invoices()
+	await starkbank.invoice.create(invoicesArray)
 }
 
 export { generateInvoices }
+
+
